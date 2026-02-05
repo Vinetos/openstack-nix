@@ -3,6 +3,7 @@
 let
   # Add my custom python package to global python for easier use
   pythonPackagesExtensions = self: super: {
+    cotyledon = self.callPackage ./cotyledon { };
     futurist = self.callPackage ./futurist { };
     oslo-cache = self.callPackage ./oslo-cache { };
     oslo-messaging = self.callPackage ./oslo-messaging { };
@@ -15,6 +16,7 @@ let
   };
 in
 {
+  cotyledon = python.pkgs.cotyledon;
   futurist = python.pkgs.futurist;
   oslo-cache = python.pkgs.oslo-cache;
   oslo-messaging = python.pkgs.oslo-messaging;
