@@ -9,6 +9,7 @@ let
     oslo-cache = self.callPackage ./oslo-cache { };
     oslo-messaging = self.callPackage ./oslo-messaging { };
     oslo-middleware = self.callPackage ./oslo-middleware { };
+    oslo-policy = self.callPackage ./oslo-policy { };
     oslo-service = self.callPackage ./oslo-service { };
     pycadf = self.callPackage ./pycadf {};
     python-binary-memcached = self.callPackage ./python-binary-memcached { };
@@ -25,6 +26,7 @@ in
   oslo-cache = python.pkgs.oslo-cache;
   oslo-messaging = python.pkgs.oslo-messaging;
   oslo-middleware = python.pkgs.oslo-middleware;
+  oslo-policy = python.pkgs.oslo-policy;
   oslo-service = python.pkgs.oslo-service;
   pycadf = python.pkgs.pycadf;
   python-binary-memcached = python.pkgs.python-binary-memcached;
