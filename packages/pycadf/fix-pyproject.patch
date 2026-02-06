@@ -1,0 +1,19 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 2c5103e..2e9e270 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -30,10 +30,10 @@ classifiers = [
+ Homepage = "https://docs.openstack.org/pycadf"
+ Repository = "https://opendev.org/openstack/pycadf"
+ 
+-[tool.setuptools]
+-packages = [
+-    "pycadf"
+-]
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["pycadf*"]
++exclude = ["*.tests", "*.tests.*", "tests.*", "tests"]
+ 
+ [tool.setuptools.data-files]
+ "etc/pycadf" = [
