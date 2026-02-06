@@ -1,0 +1,18 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 4d27974c0..0e721f020 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -171,10 +171,9 @@ ldap = [
+     "ldappool>=2.3.1", # MPL
+ ]
+ 
+-[tool.setuptools]
+-packages = [
+-    "keystone"
+-]
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["keystone*"]
+ 
+ [tool.setuptools.data-files]
+ "etc/keystone" = [
