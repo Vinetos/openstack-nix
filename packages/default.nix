@@ -17,7 +17,20 @@ let
         inherit name;
         value = self.callPackage (./${name}) { };
       }) packageNames
-    );
+    )
+    // {
+      # pysaml2 (keystone deps), is not compatible with latest xmlschema versions
+      # So we override to an old compatible version
+      # https://github.com/IdentityPython/pysaml2/issues/947
+      xmlschema = super.xmlschema.overridePythonAttrs (old: rec {
+        version = "4.1.0";
+        src = pkgs.fetchPypi {
+          pname = "xmlschema";
+          inherit version;
+          hash = "sha256-iKx3HPlNX8a70adj24wVfz1oOtIxILDQuMRv5FN/Kt8=";
+        };
+      });
+    };
 
   python = pkgs.python3.override {
     packageOverrides = pythonPackagesExtensions;
