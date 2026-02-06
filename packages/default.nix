@@ -11,7 +11,8 @@ let
     oslo-middleware = self.callPackage ./oslo-middleware { };
     oslo-policy = self.callPackage ./oslo-policy { };
     oslo-service = self.callPackage ./oslo-service { };
-    pycadf = self.callPackage ./pycadf {};
+    oslo-upgradecheck = self.callPackage ./oslo-upgradecheck { };
+    pycadf = self.callPackage ./pycadf { };
     python-binary-memcached = self.callPackage ./python-binary-memcached { };
   };
 
@@ -28,6 +29,7 @@ in
   oslo-middleware = python.pkgs.oslo-middleware;
   oslo-policy = python.pkgs.oslo-policy;
   oslo-service = python.pkgs.oslo-service;
+  oslo-upgradecheck = python.pkgs.oslo-upgradecheck;
   pycadf = python.pkgs.pycadf;
   python-binary-memcached = python.pkgs.python-binary-memcached;
 }
