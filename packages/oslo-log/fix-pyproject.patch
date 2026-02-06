@@ -1,0 +1,17 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index a03c64d..a8e08aa 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -46,8 +46,10 @@ systemd = [
+ [project.scripts]
+ convert-json = "oslo_log.cmds.convert_json:main"
+ 
+-[tool.setuptools]
+-packages = ["oslo_log"]
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["oslo_log*"]
++exclude = ["*.tests", "*.tests.*", "tests.*", "tests"]
+ 
+ [tool.mypy]
+ python_version = "3.10"
