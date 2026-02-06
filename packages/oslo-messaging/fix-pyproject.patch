@@ -1,0 +1,15 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 983db36..155015d 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -63,5 +63,7 @@ routing = "oslo_messaging.notify._impl_routing:RoutingDriver"
+ [project.entry-points."oslo.config.opts"]
+ "oslo.messaging" = "oslo_messaging.opts:list_opts"
+ 
+-[tool.setuptools]
+-packages = ["oslo_messaging"]
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["oslo_messaging*"]
++exclude = ["*.tests", "*.tests.*", "tests.*", "tests"]
+\ No newline at end of file
