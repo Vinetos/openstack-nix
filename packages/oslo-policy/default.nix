@@ -18,7 +18,7 @@
   # tests
   oslotest,
   requests-mock,
-  stestr,
+  stestrCheckHook,
   sphinx,
   coverage,
 }:
@@ -56,18 +56,10 @@ buildPythonPackage (finalAttrs: {
   nativeCheckInputs = [
     oslotest
     requests-mock
-    stestr
+    stestrCheckHook
     sphinx
     coverage
   ];
-
-  checkPhase = ''
-    runHook preCheck
-
-    stestr run
-
-    runHook postCheck
-  '';
 
   pythonImportsCheck = [
     "oslo_policy"
