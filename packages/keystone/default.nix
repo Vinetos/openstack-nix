@@ -93,6 +93,7 @@ buildPythonPackage (finalAttrs: {
     oslo-context
     oslo-messaging
     oslo-db
+    oslo-db.optional-dependencies.mysql
     oslo-i18n
     oslo-log
     oslo-middleware
@@ -109,7 +110,7 @@ buildPythonPackage (finalAttrs: {
     msgpack
     osprofiler
     werkzeug
-  ];
+  ] ++ lib.concatAttrValues finalAttrs.passthru.optional-dependencies;
 
   nativeCheckInputs = [
     stestrCheckHook

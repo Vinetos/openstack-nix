@@ -16,7 +16,13 @@ in
   options.services.openstack.keystone = {
     enable = mkEnableOption "OpenStack Keystone identity service";
 
-    package = mkPackageOption pkgs "openstack-keystone" { };
+    package = mkPackageOption pkgs [ "python3Packages" "keystone" ] { };
+
+    address = mkOption {
+      type = types.str;
+      default = "localhost";
+      description = "Keystone identity server address";
+    };
 
     database = {
       name = mkOption {
@@ -116,14 +122,14 @@ in
 
       script = ''
         # Populate the Identity service database
-        ${pkgs.keystone}/bin/keystone-manage db_sync # Ca n'existe pas, voir pour le package ??
+        ${cfg.package}/bin/keystone-manage db_sync
 
         # Initialize Fernet key repositories
-        ${pkgs.keystone}/bin/keystone-manage fernet_setup --keystone-user ${cfg.database.user} --keystone-group ${cfg.database.user}
-        ${pkgs.keystone}/bin/keystone-manage credential_setup --keystone-user ${cfg.database.user} --keystone-group ${cfg.database.user}
+        ${cfg.package}/bin/keystone-manage fernet_setup --keystone-user ${cfg.database.user} --keystone-group ${cfg.database.user}
+        ${cfg.package}/bin/keystone-manage credential_setup --keystone-user ${cfg.database.user} --keystone-group ${cfg.database.user}
 
         # Bootstrap the Identity service
-        ${pkgs.keystone}/bin/keystone-manage bootstrap --bootstrap-password ADMIN_PASS --bootstrap-admin-url http://controller:5000/v3/ --bootstrap-internal-url http://controller:5000/v3/ --bootstrap-public-url http://controller:5000/v3/ --bootstrap-region-id RegionOne
+        ${cfg.package}/bin/keystone-manage bootstrap --bootstrap-password ${commonCfg.adminPass} --bootstrap-admin-url http://${cfg.address}/v3/ --bootstrap-internal-url http://${cfg.address}/v3/ --bootstrap-public-url http://${cfg.address}/v3/ --bootstrap-region-id ${commonCfg.region}
       '';
 
       unitConfig = {
