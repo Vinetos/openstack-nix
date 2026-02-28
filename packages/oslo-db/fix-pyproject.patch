@@ -1,0 +1,18 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 2963e2f..15c0120 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -48,10 +48,9 @@ postgresql = [
+ [project.entry-points."oslo.db.migration"]
+ alembic = "oslo_db.sqlalchemy.migration_cli.ext_alembic:AlembicExtension"
+ 
+-[tool.setuptools]
+-packages = [
+-    "oslo_db"
+-]
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["oslo_db*"]
+ 
+ [tool.bandit]
+ exclude_dirs = ["tests"]
